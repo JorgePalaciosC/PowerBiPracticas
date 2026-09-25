@@ -1,0 +1,26 @@
+relationship 1850f749-cfe6-48c4-a42c-34bba05da39e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: F_VENTAS.fecha_alta_cliente
+	toColumn: LocalDateTable_ad562278-65ec-455b-be9b-08f91242ce17.Date
+
+relationship 5d0d2950-b7c9-4b16-94a4-d87fe22b8ce1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: F_VENTAS.fecha_venta
+	toColumn: LocalDateTable_1a54f397-c572-4f02-8ad5-bebed7ebe125.Date
+
+relationship 7bb1f9b9-b9d9-4ac7-87d0-67aefe0929d0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: CLIENTES.fecha_alta_cliente
+	toColumn: LocalDateTable_956dbca5-7283-4bc2-b911-ba81bae8fbe0.Date
+
+relationship 8a78d009-ccf7-40c2-b02c-9a69a146aa9e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: TRANSACCIONES.fecha_venta
+	toColumn: LocalDateTable_a442df3c-cb0b-4df3-b4cc-61f7446ec9d2.Date
+
+relationship AutoDetected_25049ef1-fff1-4db7-97f0-e9b661bd67d5
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: TRANSACCIONES.codigo_operacion
+	toColumn: F_VENTAS.codigo_operacion
+

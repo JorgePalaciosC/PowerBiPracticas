@@ -1,0 +1,110 @@
+table CLIENTES
+	lineageTag: 5f5957b4-7cbd-4e15-b29a-143cde789b5d
+
+	column codigo_cliente
+		dataType: string
+		lineageTag: 591d6e94-9cc7-4954-a5be-ed1c94a8a9d3
+		summarizeBy: none
+		sourceColumn: codigo_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_cliente
+		dataType: string
+		lineageTag: ebd52d46-4a5f-4f8e-bfdb-5015f06efb1f
+		summarizeBy: none
+		sourceColumn: nombre_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column email_cliente
+		dataType: string
+		lineageTag: 93d93f94-73e8-415a-aba0-3b086e4cfc66
+		summarizeBy: none
+		sourceColumn: email_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column telefono_cliente
+		dataType: string
+		lineageTag: ee1bc767-7821-41b8-aa7c-4c5f5e337bab
+		summarizeBy: none
+		sourceColumn: telefono_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column ciudad_cliente
+		dataType: string
+		lineageTag: 0543734d-e561-49c2-8ea2-1656e158a93e
+		summarizeBy: none
+		sourceColumn: ciudad_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column provincia_cliente
+		dataType: string
+		lineageTag: 082e591f-6340-458d-8f55-2cf3234048cc
+		summarizeBy: none
+		sourceColumn: provincia_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column segmentacion_cliente
+		dataType: string
+		lineageTag: bb33080a-8026-4eb2-9af1-d4dd7be875c2
+		summarizeBy: none
+		sourceColumn: segmentacion_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column bandera_activo
+		dataType: string
+		lineageTag: 4163d649-f75b-4e1c-9d21-f7a2b33aab03
+		summarizeBy: none
+		sourceColumn: bandera_activo
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_alta_cliente
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5bb44e44-d34a-43e9-97d4-58d24250ea6c
+		summarizeBy: none
+		sourceColumn: fecha_alta_cliente
+
+		variation Variación
+			isDefault
+			relationship: 7bb1f9b9-b9d9-4ac7-87d0-67aefe0929d0
+			defaultHierarchy: LocalDateTable_956dbca5-7283-4bc2-b911-ba81bae8fbe0.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition CLIENTES = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\JP\Downloads\Ventas_export_legacy.xlsx"), null, true),
+				    VENTAS_EXPORT_Sheet = Origen{[Item="VENTAS_EXPORT",Kind="Sheet"]}[Data],
+				    #"Encabezados promovidos" = Table.PromoteHeaders(VENTAS_EXPORT_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"COD_OP", type text}, {"COD_CLI", type text}, {"NOM_CLI", type text}, {"MAIL_CLI", type text}, {"TEL_CLI", type text}, {"CIU_CLI", type text}, {"PROV_CLI", type text}, {"SEG_CLI", type text}, {"FLG_ACT", type text}, {"F_ALTA_CLI", type date}, {"F_VTA", type datetime}, {"COD_PROD", Int64.Type}, {"DESC_PROD", type text}, {"RUBRO_PROD", type text}, {"CANT", Int64.Type}, {"PU_VTA", type number}, {"DTO_PCT", type number}, {"TOT_VTA", type number}, {"COD_MON", type text}, {"CANAL_VTA", type text}}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Tipo cambiado",{{"COD_OP", "codigo_operacion"}, {"COD_CLI", "codigo_cliente"}, {"NOM_CLI", "nombre_cliente"}, {"MAIL_CLI", "email_cliente"}, {"TEL_CLI", "telefono_cliente"}, {"CIU_CLI", "ciudad_cliente"}, {"PROV_CLI", "provincia_cliente"}, {"SEG_CLI", "segmentacion_cliente"}, {"FLG_ACT", "bandera_activo"}, {"F_ALTA_CLI", "fecha_alta_cliente"}, {"F_VTA", "fecha_venta"}, {"COD_PROD", "codigo_producto"}, {"DESC_PROD", "descripcion_producto"}, {"RUBRO_PROD", "categoria_producto"}, {"CANT", "cantidad"}, {"PU_VTA", "precio_unitario_venta"}, {"DTO_PCT", "porcentaje_descuento"}, {"TOT_VTA", "total_de_la_venta"}, {"COD_MON", "codigo_moneda"}, {"CANAL_VTA", "canal_de_venta"}}),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"porcentaje_descuento", Percentage.Type}}),
+				    #"Duplicados quitados" = Table.Distinct(#"Tipo cambiado1", {"codigo_operacion"}),
+				    #"Filas en blanco eliminadas" = Table.SelectRows(#"Duplicados quitados", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Filas en blanco eliminadas",null,"n/a",Replacer.ReplaceValue,{"email_cliente"}),
+				    #"Valor reemplazado1" = Table.ReplaceValue(#"Valor reemplazado",null,"n/a",Replacer.ReplaceValue,{"telefono_cliente"}),
+				    #"Valor reemplazado2" = Table.ReplaceValue(#"Valor reemplazado1",null,"n/a",Replacer.ReplaceValue,{"ciudad_cliente"}),
+				    #"Tipo cambiado2" = Table.TransformColumnTypes(#"Valor reemplazado2",{{"fecha_venta", type date}}),
+				    #"Valor reemplazado3" = Table.ReplaceValue(#"Tipo cambiado2",null,0,Replacer.ReplaceValue,{"porcentaje_descuento"}),
+				    #"Tipo cambiado3" = Table.TransformColumnTypes(#"Valor reemplazado3",{{"porcentaje_descuento", Percentage.Type}}),
+				    #"Valor reemplazado4" = Table.ReplaceValue(#"Tipo cambiado3",null,0,Replacer.ReplaceValue,{"total_de_la_venta"}),
+				    #"Otras columnas quitadas" = Table.SelectColumns(#"Valor reemplazado4",{"codigo_cliente", "nombre_cliente", "email_cliente", "telefono_cliente", "ciudad_cliente", "provincia_cliente", "segmentacion_cliente", "bandera_activo", "fecha_alta_cliente"})
+				in
+				    #"Otras columnas quitadas"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

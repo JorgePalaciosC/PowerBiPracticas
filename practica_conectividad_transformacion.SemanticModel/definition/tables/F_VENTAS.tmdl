@@ -1,0 +1,213 @@
+table F_VENTAS
+	lineageTag: 71b21dfc-0900-4a4d-a9a1-89074fcde3af
+
+	column codigo_operacion
+		dataType: string
+		lineageTag: 45b4e2cc-6648-493a-a28b-1a3e0769327a
+		summarizeBy: none
+		sourceColumn: codigo_operacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_cliente
+		dataType: string
+		lineageTag: 62adb779-61a0-445a-8831-86c89f747c42
+		summarizeBy: none
+		sourceColumn: codigo_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_cliente
+		dataType: string
+		lineageTag: 9fa659f4-f5a2-4e88-b4ce-afb9acc309fc
+		summarizeBy: none
+		sourceColumn: nombre_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column email_cliente
+		dataType: string
+		lineageTag: c2a2124e-6035-49a4-91ea-ac58c03436b4
+		summarizeBy: none
+		sourceColumn: email_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column telefono_cliente
+		dataType: string
+		lineageTag: 337e08b0-9d18-4b07-8bae-5ff50b0e6924
+		summarizeBy: none
+		sourceColumn: telefono_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column ciudad_cliente
+		dataType: string
+		lineageTag: 317fff40-b85e-4540-a6eb-54fbca1a68b7
+		summarizeBy: none
+		sourceColumn: ciudad_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column provincia_cliente
+		dataType: string
+		lineageTag: 6a464f85-b81a-4e48-906c-5cc80eb418d0
+		summarizeBy: none
+		sourceColumn: provincia_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column segmentacion_cliente
+		dataType: string
+		lineageTag: e896c271-bc9a-498e-ba86-ab669e998d3a
+		summarizeBy: none
+		sourceColumn: segmentacion_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column bandera_activo
+		dataType: string
+		lineageTag: 3e9c8af0-258b-422c-84e5-31d24a1507b3
+		summarizeBy: none
+		sourceColumn: bandera_activo
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_alta_cliente
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0134907d-e284-4de7-bdf3-e12f437f599d
+		summarizeBy: none
+		sourceColumn: fecha_alta_cliente
+
+		variation Variación
+			isDefault
+			relationship: 1850f749-cfe6-48c4-a42c-34bba05da39e
+			defaultHierarchy: LocalDateTable_ad562278-65ec-455b-be9b-08f91242ce17.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fecha_venta
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 81e1a16f-0875-469c-92b3-100bfd103c41
+		summarizeBy: none
+		sourceColumn: fecha_venta
+
+		variation Variación
+			isDefault
+			relationship: 5d0d2950-b7c9-4b16-94a4-d87fe22b8ce1
+			defaultHierarchy: LocalDateTable_1a54f397-c572-4f02-8ad5-bebed7ebe125.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column codigo_producto
+		dataType: int64
+		formatString: 0
+		lineageTag: 80931983-c933-4789-bb24-d91b7a912bb2
+		summarizeBy: sum
+		sourceColumn: codigo_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column descripcion_producto
+		dataType: string
+		lineageTag: 85e0ac38-2de9-49a2-a86d-5a98be1492cd
+		summarizeBy: none
+		sourceColumn: descripcion_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria_producto
+		dataType: string
+		lineageTag: 3eea494c-438f-42bc-a777-056a792eaf88
+		summarizeBy: none
+		sourceColumn: categoria_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad
+		dataType: int64
+		formatString: 0
+		lineageTag: 13d250f4-ceb2-43fb-a879-0763a024676a
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column precio_unitario_venta
+		dataType: double
+		lineageTag: a088f194-5f10-45c6-b622-2d21dba0dfe0
+		summarizeBy: sum
+		sourceColumn: precio_unitario_venta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column porcentaje_descuento
+		dataType: double
+		lineageTag: 5d68e83e-fa27-41d6-99bb-c21d896d4547
+		summarizeBy: sum
+		sourceColumn: porcentaje_descuento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_de_la_venta
+		dataType: double
+		lineageTag: 0fc1b2a1-df02-419e-b0d4-26374ca907a6
+		summarizeBy: sum
+		sourceColumn: total_de_la_venta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column codigo_moneda
+		dataType: string
+		lineageTag: 04837fa3-660a-4303-9400-5cc4e63584c8
+		summarizeBy: none
+		sourceColumn: codigo_moneda
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal_de_venta
+		dataType: string
+		lineageTag: 4c831c2f-497c-4eed-8c2f-cecd131f296c
+		summarizeBy: none
+		sourceColumn: canal_de_venta
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_VENTAS = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\JP\Downloads\Ventas_export_legacy.xlsx"), null, true),
+				    VENTAS_EXPORT_Sheet = Origen{[Item="VENTAS_EXPORT",Kind="Sheet"]}[Data],
+				    #"Encabezados promovidos" = Table.PromoteHeaders(VENTAS_EXPORT_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"COD_OP", type text}, {"COD_CLI", type text}, {"NOM_CLI", type text}, {"MAIL_CLI", type text}, {"TEL_CLI", type text}, {"CIU_CLI", type text}, {"PROV_CLI", type text}, {"SEG_CLI", type text}, {"FLG_ACT", type text}, {"F_ALTA_CLI", type date}, {"F_VTA", type datetime}, {"COD_PROD", Int64.Type}, {"DESC_PROD", type text}, {"RUBRO_PROD", type text}, {"CANT", Int64.Type}, {"PU_VTA", type number}, {"DTO_PCT", type number}, {"TOT_VTA", type number}, {"COD_MON", type text}, {"CANAL_VTA", type text}}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Tipo cambiado",{{"COD_OP", "codigo_operacion"}, {"COD_CLI", "codigo_cliente"}, {"NOM_CLI", "nombre_cliente"}, {"MAIL_CLI", "email_cliente"}, {"TEL_CLI", "telefono_cliente"}, {"CIU_CLI", "ciudad_cliente"}, {"PROV_CLI", "provincia_cliente"}, {"SEG_CLI", "segmentacion_cliente"}, {"FLG_ACT", "bandera_activo"}, {"F_ALTA_CLI", "fecha_alta_cliente"}, {"F_VTA", "fecha_venta"}, {"COD_PROD", "codigo_producto"}, {"DESC_PROD", "descripcion_producto"}, {"RUBRO_PROD", "categoria_producto"}, {"CANT", "cantidad"}, {"PU_VTA", "precio_unitario_venta"}, {"DTO_PCT", "porcentaje_descuento"}, {"TOT_VTA", "total_de_la_venta"}, {"COD_MON", "codigo_moneda"}, {"CANAL_VTA", "canal_de_venta"}}),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"porcentaje_descuento", Percentage.Type}}),
+				    #"Duplicados quitados" = Table.Distinct(#"Tipo cambiado1", {"codigo_operacion"}),
+				    #"Filas en blanco eliminadas" = Table.SelectRows(#"Duplicados quitados", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Filas en blanco eliminadas",null,"n/a",Replacer.ReplaceValue,{"email_cliente"}),
+				    #"Valor reemplazado1" = Table.ReplaceValue(#"Valor reemplazado",null,"n/a",Replacer.ReplaceValue,{"telefono_cliente"}),
+				    #"Valor reemplazado2" = Table.ReplaceValue(#"Valor reemplazado1",null,"n/a",Replacer.ReplaceValue,{"ciudad_cliente"}),
+				    #"Tipo cambiado2" = Table.TransformColumnTypes(#"Valor reemplazado2",{{"fecha_venta", type date}}),
+				    #"Valor reemplazado3" = Table.ReplaceValue(#"Tipo cambiado2",null,0,Replacer.ReplaceValue,{"porcentaje_descuento"}),
+				    #"Tipo cambiado3" = Table.TransformColumnTypes(#"Valor reemplazado3",{{"porcentaje_descuento", Percentage.Type}}),
+				    #"Valor reemplazado4" = Table.ReplaceValue(#"Tipo cambiado3",null,0,Replacer.ReplaceValue,{"total_de_la_venta"})
+				in
+				    #"Valor reemplazado4"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+
