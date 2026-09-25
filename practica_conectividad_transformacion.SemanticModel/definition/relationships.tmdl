@@ -1,0 +1,14 @@
+relationship 7bb1f9b9-b9d9-4ac7-87d0-67aefe0929d0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: D_CLIENTES.fecha_alta_cliente
+	toColumn: LocalDateTable_956dbca5-7283-4bc2-b911-ba81bae8fbe0.Date
+
+relationship 8a78d009-ccf7-40c2-b02c-9a69a146aa9e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: F_TRANSACCIONES.fecha_venta
+	toColumn: LocalDateTable_a442df3c-cb0b-4df3-b4cc-61f7446ec9d2.Date
+
+relationship 839d5baa-25f3-707c-9ad8-147d09b27592
+	fromColumn: F_TRANSACCIONES.codigo_cliente
+	toColumn: D_CLIENTES.codigo_cliente
+

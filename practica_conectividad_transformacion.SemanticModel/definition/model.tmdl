@@ -1,0 +1,23 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-MX
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["D_CLIENTES","F_TRANSACCIONES"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_c86b53eb-b676-40d2-b500-1f1d2f9b00e2
+ref table D_CLIENTES
+ref table LocalDateTable_956dbca5-7283-4bc2-b911-ba81bae8fbe0
+ref table F_TRANSACCIONES
+ref table LocalDateTable_a442df3c-cb0b-4df3-b4cc-61f7446ec9d2
+
+ref cultureInfo es-ES
+
